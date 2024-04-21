@@ -5,8 +5,8 @@ TagManager:
   serializedVersion: 2
   tags:
   - Eat
-  - bush
   - Bush
+  - Bot
   layers:
   - Default
   - TransparentFX
