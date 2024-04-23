@@ -12,10 +12,10 @@ public class BotControl : MonoBehaviour
     private List<GameObject> _bushs;
     private float quotient;
     private float delta;
-    public float bmass;
+    public float bmass = 10f;
     private Vector2 randVec;
     private Vector3 vecScale;
-    private int massCoin;
+    private int massCoin =10;
     public GameObject Bush;
 
     /*void Awake()
@@ -48,6 +48,15 @@ public class BotControl : MonoBehaviour
         
     }*/
 
+    void Start()
+    {
+        
+        vecScale.Set(1, 1, 1);
+       
+    }
+
+
+
     private void Update()
     {
         // Если нет текущего объекта "еды", найдем новый
@@ -59,6 +68,10 @@ public class BotControl : MonoBehaviour
         {
             MoveTowardsEatObject();
         }
+
+        vecScale.Set((bmass / 200 + 0.95f), (bmass / 200 + 0.95f), 1);
+        transform.localScale = vecScale;
+        bmass -= 0.00000002f * bmass * bmass;
     }
 
     // Функция для поиска ближайшего объекта с тегом "Eat"

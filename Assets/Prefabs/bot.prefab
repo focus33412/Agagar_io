@@ -99,9 +99,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e23ed2c41db74da4e8a8d8021d0d1c73, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 0.1
+  speed: 5
   player: {fileID: 0}
   Eat: {fileID: 1787266274364825363, guid: f2d05fb4f3a9b7c47a992d5d167d8e66, type: 3}
+  eatObject: {fileID: 0}
+  eatRadius: 2
   _bushScript: {fileID: 0}
   bmass: 0
   Bush: {fileID: 5971093031102894144, guid: 4f1d9504bc8bf4b439c3992ae7c57d76, type: 3}
