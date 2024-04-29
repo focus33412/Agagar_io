@@ -120,10 +120,10 @@ public class BotControl : MonoBehaviour
         {
             bmass += massCoin;
 
-            // коснись и телепортируй в рандомное место
-            randVec.Set(Random.Range(-99.5f, 99.5f), Random.Range(-99.5f, 99.5f));
-            col.gameObject.transform.position = randVec;
+            // коснись и удали со сцены
+            Destroy(col.gameObject);
             eatObject = null;
+
 
         }
     }

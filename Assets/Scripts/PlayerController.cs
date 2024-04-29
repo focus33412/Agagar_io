@@ -18,15 +18,20 @@ public class PlayerController : MonoBehaviour
     private int massCoin;
     
     public GameObject Bush;
-    
+    public int eatCount;
+
+
     void Start()
     {
         _bushs = _bushScript.bushs;
         mass = 10;
         camSize = 8;
-        massCoin = 10;  
-        vecScale.Set(1,1,1);
+        massCoin = 10;
+        vecScale.Set(1, 1, 1);
         delta = 8 * Mathf.Pow(20, -Mathf.Log(2, 0.1f)) * Mathf.Pow(mass, Mathf.Log(2, 0.1f));
+
+        // Найти количество объектов Eat и присвоить переменной eatCount
+        
     }
     void Update()
     {
@@ -40,6 +45,11 @@ public class PlayerController : MonoBehaviour
         vecScale.Set((mass / 200 + 0.95f), (mass / 200 + 0.95f), 1);
         transform.localScale = vecScale;
         mass -= 0.00000002f * mass * mass;
+
+        // Найти количество объектов Eat и присвоить переменной eatCount
+        GameObject[] eatObjects = GameObject.FindGameObjectsWithTag("Eat");
+        eatCount = eatObjects.Length;
+
         if (cam.orthographicSize > camSize)
         {
             if (cam.orthographicSize - 1 > camSize)
@@ -68,12 +78,13 @@ public class PlayerController : MonoBehaviour
     {
         if (col.gameObject.tag == "Eat")
         {
-            mass+= massCoin;
+            mass += massCoin;
 
-            // коснись и телепортируй в рандомное место
-            randVec.Set(Random.Range(-99.5f, 99.5f), Random.Range(-99.5f, 99.5f)); 
-            col.gameObject.transform.position = randVec;
+            // коснись и удали со сцены
+            Destroy(col.gameObject);
             camSize += 0.002f * massCoin;
+
+            
         }
     }
     private void OnCollisionEnter2D(Collision2D collision)
