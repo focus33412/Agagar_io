@@ -15,23 +15,20 @@ public class PlayerController : MonoBehaviour
 
     [SerializeField] private SpawnBush _bushScript;
     private List<GameObject> _bushs;
-    private float quotient;
-    private float delta;
-    public float mass;
-    private Vector2 randVec;
     private Vector3 vecScale;
     public Camera cam;
     private float camSize;
     private int massCoin;
     
     public GameObject Bush;
-    public int eatCount;
-    public int botCount;
+    private int _eatCount;
+    private int _botCount;
 
     public Text eatCountText;
     public Text botCountText;
 
     public GameObject panel;
+    private int start = 0;
 
     private void FixedUpdate()
     {
@@ -41,7 +38,6 @@ public class PlayerController : MonoBehaviour
     void Start()
     {
         _bushs = _bushScript.bushs;
-        mass = 10;
         camSize = 8;
         //massCoin = 10;
         vecScale.Set(1, 1, 1);
@@ -61,14 +57,20 @@ public class PlayerController : MonoBehaviour
 
         // Найти количество объектов Eat и присвоить переменной eatCount
         GameObject[] eatObjects = GameObject.FindGameObjectsWithTag("Eat");
-        eatCount = eatObjects.Length;
+        _eatCount = eatObjects.Length;
 
         GameObject[] botObjects = GameObject.FindGameObjectsWithTag("Bot");
-        botCount = botObjects.Length;
+        _botCount = botObjects.Length;
 
-        
 
-        if (botCount <= 0)
+
+
+        if (_botCount == 1)
+        {
+            start++;
+        }
+
+        if (start >= 1 && _botCount <= 0)
         {
             panel.SetActive(true);
             Time.timeScale = 0f;
@@ -76,11 +78,14 @@ public class PlayerController : MonoBehaviour
         }
 
 
-        eatCount = eatObjects.Length;
-        eatCountText.text = "Счет: " + eatCount.ToString();
 
-        botCount = botObjects.Length;
-        botCountText.text = "Саранчи: " + botCount.ToString();
+
+
+        _eatCount = eatObjects.Length;
+        eatCountText.text = "Счет: " + _eatCount.ToString();
+
+        _botCount = botObjects.Length;
+        botCountText.text = "Саранчи: " + _botCount.ToString();
 
 
 
@@ -112,16 +117,11 @@ public class PlayerController : MonoBehaviour
     {
         if (col.gameObject.tag == "Eat")
         {
-            mass += massCoin;
-
             // коснись и удали со сцены
-            Destroy(col.gameObject);
-            camSize += 0.002f * massCoin;
-
-            
+            Destroy(col.gameObject); 
         }
     }
-    private void OnCollisionEnter2D(Collision2D collision)
+    /*private void OnCollisionEnter2D(Collision2D collision)
     {
         if (mass < 1000)
         {
@@ -143,5 +143,5 @@ public class PlayerController : MonoBehaviour
                 _bushs[i].GetComponent<CircleCollider2D>().isTrigger = false;
             }
         }
-    }
+    }*/
 }

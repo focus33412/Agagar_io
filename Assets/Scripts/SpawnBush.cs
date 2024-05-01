@@ -10,7 +10,7 @@ public class SpawnBush: MonoBehaviour
 
     void Awake()
     {
-        for (int i = 0; i < 100; i++)
+        for (int i = 0; i < 0; i++)
         {
             randVector.Set(Random.Range(-99.5f, 99.5f), Random.Range(-99.5f, 99.5f));
             GameObject axaxa = Instantiate(Bush, randVector, Quaternion.identity);

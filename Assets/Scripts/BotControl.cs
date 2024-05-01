@@ -4,58 +4,20 @@ using UnityEngine;
 public class BotControl : MonoBehaviour
 {
     public float speed = 5f;
-    public Transform player;
     public Transform Eat;
     public GameObject eatObject;           // —сылка на текущий объект "еды", к которому движетс€ бот
     public float eatRadius = 2f;
     [SerializeField] private SpawnBush _bushScript;
     private List<GameObject> _bushs;
-    private float quotient;
-    private float delta;
     public float bmass = 10f;
-    private Vector2 randVec;
     private Vector3 vecScale;
     private int massCoin =10;
     public GameObject Bush;
 
-    /*void Awake()
-    {
-       //player = GameObject.FindGameObjectWithTag("Player").GetComponent<Transform>();
-        Eat = GameObject.FindGameObjectWithTag("Eat").GetComponent<Transform>();
-    }
-
-
-    void FixedUpdate()
-    {
-       //transform.position = Vector2.MoveTowards(transform.position, player.position, speed);
-        transform.position = Vector2.MoveTowards(transform.position, Eat.position, speed);
-    }
     void Start()
     {
-        _bushs = _bushScript.bushs;
-        bmass = 10;
-        
-        massCoin = 10;
         vecScale.Set(1, 1, 1);
-        delta = 8 * Mathf.Pow(20, -Mathf.Log(2, 0.1f)) * Mathf.Pow(bmass, Mathf.Log(2, 0.1f));
     }
-    void Update()
-    {
-        delta = 8 * Mathf.Pow(20, -Mathf.Log(2, 0.1f)) * Mathf.Pow(bmass, Mathf.Log(2, 0.1f));
-        vecScale.Set((bmass / 200 + 0.95f), (bmass / 200 + 0.95f), 1);
-        transform.localScale = vecScale;
-        bmass -= 0.00000002f * bmass * bmass;
-        
-    }*/
-
-    void Start()
-    {
-        
-        vecScale.Set(1, 1, 1);
-       
-    }
-
-
 
     private void Update()
     {

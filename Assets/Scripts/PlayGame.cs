@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayGame : MonoBehaviour
 {
@@ -15,7 +16,11 @@ public class PlayGame : MonoBehaviour
         panel.SetActive(true);
         Time.timeScale = 0f;
     }
+    public void Resume()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        Time.timeScale = 1f;
+    }
 
-    
 }
 
