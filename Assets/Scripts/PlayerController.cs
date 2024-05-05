@@ -30,10 +30,21 @@ public class PlayerController : MonoBehaviour
     public GameObject panel;
     private int start = 0;
 
+    public Animator animator;
+
     private void FixedUpdate()
     {
-        _rigibody.velocity = new Vector3(_joystick.Horizontal * _moveSpeed,  _joystick.Vertical * +_moveSpeed);
+        Vector2 movement = new Vector2(_joystick.Horizontal, _joystick.Vertical);
+        movement.Normalize(); // Ќормализуем дл€ предотвращени€ ускоренного диагонального движени€
+
+        _rigibody.velocity = movement * _moveSpeed;
+
+        // ќбновл€ем параметры аниматора на основе движени€
+        animator.SetFloat("Horizontal", movement.x);
+        animator.SetFloat("Vertical", movement.y);
+        animator.SetFloat("Speed", movement.sqrMagnitude); // »спользуем magnitude дл€ смешивани€ анимаций
     }
+
 
     void Start()
     {
@@ -62,7 +73,7 @@ public class PlayerController : MonoBehaviour
         GameObject[] botObjects = GameObject.FindGameObjectsWithTag("Bot");
         _botCount = botObjects.Length;
 
-
+       
 
 
         if (_botCount == 1)
@@ -89,7 +100,7 @@ public class PlayerController : MonoBehaviour
 
 
 
-        if (cam.orthographicSize > camSize)
+        /*if (cam.orthographicSize > camSize)
         {
             if (cam.orthographicSize - 1 > camSize)
             {
@@ -110,7 +121,7 @@ public class PlayerController : MonoBehaviour
             {
                 cam.orthographicSize += 0.0001f;
             }
-        }
+        }*/
     }
 
     private void OnTriggerEnter2D(Collider2D col)
